@@ -6,7 +6,26 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    # profile_photo = models.ImageField
     pass
 
-class Gallery(models.Model):
+# class Gallery(models.Model):
+#     default_photo = models.ForeignKey(to=Photo)
+#     title = models.CharField(max_length=600)
+#     public = models.BooleanField(default=False)
+#     owner = models.ForeignKey(to=User)
     
+
+# class Photo(models.Model):
+#     image = models.ImageField
+#     gallery = models.ForeignKey(to=Gallery)
+#     owner = models.ForeignKey(to=User)
+#     pinned = models.BooleanField(default=False)
+    
+
+# class Comment(models.Model):
+#     text = models.TextField(max_length=600)
+#     date = models.DateTimeField
+#     author = models.ForeignKey(to=User)
+#     photo = models.ForeignKey(to=Photo)
+   
