@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('photo_gallery_aaron/', include('photo_gallery_aaron.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
+    
 ]
 
 if settings.DEBUG:

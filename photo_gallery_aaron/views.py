@@ -1,11 +1,14 @@
 from django.shortcuts import render
 
-# Create your views here.
 from django.http import HttpResponse
 
 # Create your views here.
-def create_gallery(request):
-    return HttpResponse("create gallery view")
+
+def index_view(request):
+    return HttpResponse('index view')
+
+# def create_gallery(request):
+#     return HttpResponse("create gallery view")
 
 # def view_gallery(request):
     """Returns list of photos for gallery view."""
@@ -26,5 +29,5 @@ def create_gallery(request):
     """Add comment to a photo."""
 # # goes to url, comment on photo, and takes them back to photo
 
-# def view_user(request):
+# def user_detail_view(request):
     """Return user details, uploaded photos and galleries."""

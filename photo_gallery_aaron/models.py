@@ -1,11 +1,18 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, ResizeToFit
 
 from users.models import User
 
 # Create your models here.
 class Photo(models.Model):
-    image = models.ImageField
-    # gallery = models.ForeignKey(to=Gallery, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='Photo/', null=True)
+    # image_medium = models.ImageSpecField(source='image',
+    #                                         processors=[ResizeToFit(300, 300)], format='jpeg', options={'quality': 80})
+    # image_thumbnail = models.ImageSpecField(source='image',
+    #                                         processors=[ResizeToFill(300, 300)], format='jpeg', options={'quality': 80})                                        
+                                            
+    # gallery = models.ForeignKey(to='Gallery', on_delete=models.CASCADE)
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
     pinned = models.BooleanField(default=False)
     

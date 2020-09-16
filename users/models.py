@@ -7,5 +7,3 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     profile_photo = models.ImageField
-    
-
