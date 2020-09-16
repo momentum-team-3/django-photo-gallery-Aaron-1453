@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'django_extensions',
 
     # Project-specific
-    'users',
+    'photo_gallery_aaron.apps.PhotoGalleryAaronConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
