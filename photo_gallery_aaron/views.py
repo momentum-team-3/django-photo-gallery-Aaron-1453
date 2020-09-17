@@ -4,8 +4,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def index_view(request):
-    return HttpResponse('index view')
+def homepage(request):
+    return render(request, "homepage.html", {}) 
 
 # def create_gallery(request):
 #     return HttpResponse("create gallery view")
