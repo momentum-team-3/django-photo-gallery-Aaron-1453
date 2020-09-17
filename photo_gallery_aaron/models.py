@@ -20,8 +20,8 @@ class Photo(models.Model):
 class Comment(models.Model):
     text = models.TextField(max_length=600)
     pub_date = models.DateTimeField
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='comment')
+    photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE, related_name='comment')
     
     
 class Gallery(models.Model):

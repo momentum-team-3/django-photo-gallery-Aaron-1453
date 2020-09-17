@@ -152,3 +152,6 @@ del DATABASES['default']['OPTIONS']['sslmode']
 # Registration and login
 
 LOGIN_REDIRECT_URL = '/'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.bakcends.console.EmailBackend'

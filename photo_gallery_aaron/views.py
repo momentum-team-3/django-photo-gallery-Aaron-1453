@@ -7,8 +7,8 @@ from django.http import HttpResponse
 def homepage(request):
     return render(request, "homepage.html", {}) 
 
-# def create_gallery(request):
-#     return HttpResponse("create gallery view")
+def create_gallery(request):
+    return HttpResponse("create gallery view")
 
 # def view_gallery(request):
     """Returns list of photos for gallery view."""
