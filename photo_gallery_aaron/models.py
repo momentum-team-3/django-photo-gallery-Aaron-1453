@@ -12,7 +12,7 @@ class Photo(models.Model):
     image_thumbnail = ImageSpecField(source='image',
                                             processors=[ResizeToFill(300, 300)], format='jpeg', options={'quality': 80})                                        
                                             
-    gallery = models.ForeignKey(to='Gallery', on_delete=models.CASCADE, related_name='photos')
+    gallery = models.ForeignKey(to='Gallery', null=True, on_delete=models.CASCADE, related_name='photos')
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
     pinned = models.BooleanField(default=False)
     

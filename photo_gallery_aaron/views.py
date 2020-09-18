@@ -17,6 +17,7 @@ def add_gallery(request):
         if form.is_valid():
             form.save()
             return redirect(to='view_gallery')
+    return render(request, "gallery/add_gallery.html", {'form':form})
 
 def view_gallery(request):
     """Returns list of photos for gallery view."""
