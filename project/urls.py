@@ -24,6 +24,16 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
+# Photo urls
+    path('photo/detail/', views.photo_detail, name='photo_detail'),
+    path('photo/upload_photo/', views.upload_photo, name='upload_photo'),
+    path('photo/delete_photo/', views.delete_photo, name='delete_photo'),
+    path('photo/photo_comment/', views.photo_comment, name='photo_comment'),
+
+#Gallery urls
+    path('gallery/add/', views.add_gallery, name='add_gallery'),
+    path('gallery/view/', views.view_gallery, name='view_gallery'),
+    path('gallery/edit', views.edit_gallery, name='edit_gallery'),
 ]
 
 if settings.DEBUG:
