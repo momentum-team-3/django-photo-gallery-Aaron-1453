@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Photo, Comment, Gallery
+from .forms import GalleryForm
 
 from django.http import HttpResponse
 
@@ -9,11 +10,18 @@ def homepage(request):
     return render(request, "homepage.html", {}) 
 
 def add_gallery(request):
-    return HttpResponse("add_gallery")
+    if request.method == "GET":
+        form = GalleryForm()
+    else:
+        form = GalleryForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(to='view_gallery')
 
 def view_gallery(request):
     """Returns list of photos for gallery view."""
-    return HttpResponse("view_gallery")
+    # photos = Photo.objects.all()
+    # return render(request, "photos/detail")
     # include logic to order photo list by pinned photos
     
 def edit_gallery(request):
