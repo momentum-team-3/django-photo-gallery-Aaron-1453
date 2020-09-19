@@ -25,7 +25,7 @@ class Comment(models.Model):
     
     
 class Gallery(models.Model):
-    default_photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE, related_name='+')
+    # default_photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE, related_name='+')
     title = models.CharField(max_length=600)
     public = models.BooleanField(default=False)
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)

@@ -15,14 +15,16 @@ def add_gallery(request):
     else:
         form = GalleryForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(to='view_gallery')
+            gallery = form.save(commit=False)
+            gallery.owner = request.user
+            gallery.save()
+            return redirect(to='view_gallery', gallery_pk=gallery.pk)
     return render(request, "gallery/add_gallery.html", {'form':form})
 
 def view_gallery(request):
     """Returns list of photos for gallery view."""
     # photos = Photo.objects.all()
-    # return render(request, "photos/detail")
+    return HttpResponse('view_gallery')
     # include logic to order photo list by pinned photos
     
 def edit_gallery(request):
