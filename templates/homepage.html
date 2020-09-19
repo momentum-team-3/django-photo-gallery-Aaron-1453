@@ -3,6 +3,7 @@
 {% block content %} 
     {% if user.is_authenticated %}
         <p>Hi, {{ user.username }}!</p>
+        <p><a href="{% url 'add_gallery' %}">go to add galleries</p>
         <p><a href="{% url 'auth_logout' %}">log out</a></p>
     {% else %}
         <p>
@@ -12,5 +13,6 @@
         <p>
         <a href="{% url 'registration_register' %}">sign up</a>
         </p>
+        
     {% endif %} 
 {% endblock %}

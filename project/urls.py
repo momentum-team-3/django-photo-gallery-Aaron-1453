@@ -32,8 +32,9 @@ urlpatterns = [
 
 #Gallery urls
     path('gallery/add_gallery/', views.add_gallery, name='add_gallery'),
-    path('gallery/view_gallery/', views.view_gallery, name='view_gallery'),
+    path('gallery/view_gallery/<int:gallery_pk>/', views.view_gallery, name='view_gallery'),
     path('gallery/edit_gallery/', views.edit_gallery, name='edit_gallery'),
+    path('gallery/user_galleries/', views.user_galleries, name='user_galleries')
 ]
 
 if settings.DEBUG:

@@ -21,11 +21,23 @@ def add_gallery(request):
             return redirect(to='view_gallery', gallery_pk=gallery.pk)
     return render(request, "gallery/add_gallery.html", {'form':form})
 
-def view_gallery(request):
+def view_gallery(request, gallery_pk):
     """Returns list of photos for gallery view."""
-    # photos = Photo.objects.all()
-    return HttpResponse('view_gallery')
-    # include logic to order photo list by pinned photos
+    gallery = get_object_or_404(Gallery, pk=gallery_pk)
+    photos = gallery.photos.all()
+    return render(request, "gallery/view_gallery.html", {
+        'gallery': gallery,
+        'photos': photos,
+        "gallery_pk": gallery_pk
+    })
+    
+def user_galleries(request):
+    """list of all galleries belonging to user"""
+    galleries = request.user.gallery_owner(all)
+    return render(request, "gallery/user_galleries.html", {
+        'galleries': galleries,
+    })
+    
     
 def edit_gallery(request):
     return HttpResponse('edit_gallery')
