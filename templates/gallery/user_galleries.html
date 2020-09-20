@@ -1,2 +1,12 @@
-{% extends "base.html" %}
-usergalleries
+{% extends "base.html" %} 
+
+{% block content %}
+<p>gallery owner: {{ request.user }}</p>
+{% if galleries is not None %}
+    {% for gallery in galleries %}
+        <p>gallery titles: {{ gallery.title }}</p>
+    {% endfor %}
+{% endif %}
+<p><a href = "{% url 'add_gallery' %}"> back to add gallery</a></p>
+<p><a href = "{% url 'homepage' %}"> home</a></p>
+{% endblock %}

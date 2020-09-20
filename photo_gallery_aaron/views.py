@@ -33,7 +33,7 @@ def view_gallery(request, gallery_pk):
     
 def user_galleries(request):
     """list of all galleries belonging to user"""
-    galleries = request.user.gallery_owner(all)
+    galleries = request.user.gallery_owner.all()
     return render(request, "gallery/user_galleries.html", {
         'galleries': galleries,
     })
@@ -58,6 +58,9 @@ def photo_comment(request):
     """Add comment to a photo."""
 # # goes to url, comment on photo, and takes them back to photo
     return HttpResponse('photo_comment')
+
+def logout(request):
+    return render(request, 'logout.html')
 
 # def view_profile(request):
 #     """Return user details, uploaded photos and galleries."""

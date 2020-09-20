@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/logout/', views.logout, name='logout'),
 # Photo urls
     path('photo/detail/', views.photo_detail, name='photo_detail'),
     path('photo/upload_photo/', views.upload_photo, name='upload_photo'),
