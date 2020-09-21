@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>upload_photo</h1>
+<form action ="{% url 'upload_photo' %}" method='Post' enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">upload_photo</button>
+<p><a href = "{% url 'homepage' %}"> home</a></p>
+</form>
+{% endblock %}

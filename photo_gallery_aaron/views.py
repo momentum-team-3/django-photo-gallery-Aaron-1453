@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Photo, Comment, Gallery
-from .forms import GalleryForm
+from .forms import GalleryForm, PhotoForm
 
 from django.http import HttpResponse
 
@@ -22,13 +22,13 @@ def add_gallery(request):
     return render(request, "gallery/add_gallery.html", {'form':form})
 
 def view_gallery(request, gallery_pk):
-    """Returns list of photos for gallery view."""
+    """Returns list of galleries for gallery view."""
     gallery = get_object_or_404(Gallery, pk=gallery_pk)
     photos = gallery.photos.all()
     return render(request, "gallery/view_gallery.html", {
         'gallery': gallery,
         'photos': photos,
-        "gallery_pk": gallery_pk
+        "gallery_pk": gallery_pk,
     })
     
 def user_galleries(request):
@@ -42,17 +42,43 @@ def user_galleries(request):
 def edit_gallery(request):
     return HttpResponse('edit_gallery')
 
-def photo_detail(request):
-    """Return list of details for a photo."""
-    return HttpResponse('photo_detail')
+# def view_photo(request, photo_pk):
+#     """Return list of details for a photo."""
+#     photo = get_object_or_404(Photo, pk=photo_pk)
+#     return render(request, "photo/view_photo.html", {
+#         'photo': photo,
+#         'photo_pk': photo_pk,
+#     })
+
+def user_photos_list(request):
+    photos = request.user.owner_photos.all()
+    return render(request, "photo/user_photos_list.html", {
+        "photos": photos
+    })
 
 def upload_photo(request):
-    """Give user ability to save photos to gallery."""
-    return HttpResponse('upload_photo')
+    if request.method == "GET":
+        form = PhotoForm()
+    else:
+        form = PhotoForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            photo = form.save(commit=False)
+            photo.owner = request.user
+            photo.save()
+            return redirect(to='user_photos_list')
+    return render(request, "photo/upload_photo.html", {
+        'form':form
+        })
 
-def delete_photo(request):
+def delete_photo(request, photo_pk):
     """Delete photo from user account."""
-    return HttpResponse('delete_photo')
+    photo = get_object_or_404(Photo, pk=photo_pk)
+    if request.method == "POST":
+        photo.delete()
+        return redirect('user_photos_list')
+    return render (request, 'photo/delete_photo.html', {
+        'photo': photo
+    })
 
 def photo_comment(request):
     """Add comment to a photo."""

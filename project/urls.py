@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 from photo_gallery_aaron import views
+from django.conf.urls.static import static
 
 
 
@@ -26,9 +27,10 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/logout/', views.logout, name='logout'),
 # Photo urls
-    path('photo/detail/', views.photo_detail, name='photo_detail'),
+    # path('photo/view_photo/<int:photo_pk>', views.view_photo, name='view_photo'),
+    path('photo/user_photos_list', views.user_photos_list, name='user_photos_list'),
     path('photo/upload_photo/', views.upload_photo, name='upload_photo'),
-    path('photo/delete_photo/', views.delete_photo, name='delete_photo'),
+    path('photo/delete_photo/<int:photo_pk>/', views.delete_photo, name='delete_photo'),
     path('photo/photo_comment/', views.photo_comment, name='photo_comment'),
 
 #Gallery urls
@@ -36,7 +38,7 @@ urlpatterns = [
     path('gallery/view_gallery/<int:gallery_pk>/', views.view_gallery, name='view_gallery'),
     path('gallery/edit_gallery/', views.edit_gallery, name='edit_gallery'),
     path('gallery/user_galleries/', views.user_galleries, name='user_galleries')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

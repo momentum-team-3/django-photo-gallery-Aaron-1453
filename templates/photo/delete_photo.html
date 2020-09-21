@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Delete photo</p>
+<form action='{% url 'delete_photo' photo.pk %}' method="POST">
+    {% csrf_token %}
+    <button type='submit'>delete_photo</button>
+</form>
+{% endblock %}
