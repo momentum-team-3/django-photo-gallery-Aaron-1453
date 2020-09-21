@@ -4,9 +4,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}My Cool Site {% endblock %}</title>
+    <title>{% block title %}Photogallery App{% endblock %}</title>
     {% block meta %} {% endblock %}
   </head>
+  <h1>Photogallery App</h1>
+  {% block navbar %}
+  <nav>
+    <p><a href = "{% url 'add_gallery' %}"> add_gallery</a></p>
+    <p><a href = "{% url 'homepage' %}"> home</a></p>
+    <p><a href = "{% url 'upload_photo' %}"> upload_photos</a></p>
+    <p><a href = "{% url 'user_galleries' %}"> user_galleries </a></p>
+    <p><a href = "{% url 'user_photos_list' %}"> user_photos </a></p>
+    <p><a href = "{% url 'auth_logout' %}">log out</a></p>
+  </nav>
+  {% endblock %}
   <body>
     {% block content %} {% endblock %}
   </body>

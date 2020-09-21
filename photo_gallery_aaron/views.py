@@ -42,13 +42,13 @@ def user_galleries(request):
 def edit_gallery(request):
     return HttpResponse('edit_gallery')
 
-# def view_photo(request, photo_pk):
-#     """Return list of details for a photo."""
-#     photo = get_object_or_404(Photo, pk=photo_pk)
-#     return render(request, "photo/view_photo.html", {
-#         'photo': photo,
-#         'photo_pk': photo_pk,
-#     })
+def view_photo(request, photo_pk):
+    """Return list of details for a photo."""
+    photo = get_object_or_404(request.user.photo, pk=photo_pk)
+    return render(request, "photo/view_photo.html", {
+        'photo': photo,
+        'photo_pk': photo_pk,
+    })
 
 def user_photos_list(request):
     photos = request.user.owner_photos.all()

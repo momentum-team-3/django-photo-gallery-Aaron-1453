@@ -6,14 +6,14 @@ from users.models import User
 
 # Create your models here.
 class Photo(models.Model):
-    photo = models.ImageField(upload_to='photo/', null=True)
+    photo = models.ImageField(upload_to='photo', null=True)
     image_medium = ImageSpecField(source='photo',
                                             processors=[ResizeToFit(300, 300)], format='jpeg', options={'quality': 80})
     image_thumbnail = ImageSpecField(source='photo',
                                             processors=[ResizeToFill(300, 300)], format='jpeg', options={'quality': 80})                                        
                                             
     gallery = models.ForeignKey(to='Gallery', null=True, on_delete=models.CASCADE, related_name='gallery_photos')
-    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='owner_photos')
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='owner_photos', null=True, blank=True)
     pinned = models.BooleanField(default=False)
     
     

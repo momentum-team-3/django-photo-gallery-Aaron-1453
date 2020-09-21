@@ -2,6 +2,7 @@
 
 {% block content %}
 <p>Delete photo</p>
+<img src='{{ photo.photo }}'/>
 <form action='{% url 'delete_photo' photo.pk %}' method="POST">
     {% csrf_token %}
     <button type='submit'>delete_photo</button>

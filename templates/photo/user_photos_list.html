@@ -4,14 +4,10 @@
 {% if photos is not None %}
     {% for photo in photos %}
         <img src='{{ photo.photo }}'/>
+       
     {% empty %}
         <p>no photos</p>
     {% endfor %}
 {% endif %}
-
-<p><a href = "{% url 'add_gallery' %}"> back to add gallery</a></p>
-<p><a href = "{% url 'homepage' %}"> home</a></p>
-<p><a href = "{% url 'upload_photo' %}"> back to upload photos</a></p>
-<p><a href = "{% url 'user_galleries' %}"> user_galleries </a></p>
 
 {% endblock %}
