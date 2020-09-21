@@ -39,12 +39,17 @@ def user_galleries(request):
     })
     
     
-def edit_gallery(request):
-    return HttpResponse('edit_gallery')
+# def edit_gallery(request, gallery_pk):
+#     gallery = get_object_or_404(Gallery, pk=gallery_pk)
+#     photos=gallery.photos.all()
+#     return render(request, "gallery/edit_gallery.html", {
+#         'gallery': gallery,
+#         'photos': photos,
+#         "gallery_pk": gallery_pk,})
 
 def view_photo(request, photo_pk):
     """Return list of details for a photo."""
-    photo = get_object_or_404(request.user.photo, pk=photo_pk)
+    photo = get_object_or_404(request.user.owner_photos, pk=photo_pk)
     return render(request, "photo/view_photo.html", {
         'photo': photo,
         'photo_pk': photo_pk,

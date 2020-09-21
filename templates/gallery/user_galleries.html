@@ -4,7 +4,7 @@
 <p>gallery owner: {{ request.user }}</p>
 {% if galleries is not None %}
     {% for gallery in galleries %}
-        <p>gallery titles: {{ gallery.title }}</p>
+        <p>gallery title: {{ gallery.title }}</p>
     {% endfor %}
 {% endif %}
 {% endblock %}
