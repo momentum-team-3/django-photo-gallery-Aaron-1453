@@ -3,7 +3,7 @@
 {% block content %}
 {% if photos is not None %}
     {% for photo in photos %}
-        <img src='{{ photo.photo }}'/>
+        <img src='{{ photo.image_thumbnail.url }}'/>
        
     {% empty %}
         <p>no photos</p>

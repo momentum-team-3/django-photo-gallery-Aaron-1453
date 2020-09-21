@@ -27,11 +27,11 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/logout/', views.logout, name='logout'),
 # Photo urls
-    path('photo/view_photo/<int:photo_pk>', views.view_photo, name='view_photo'),
-    path('photo/user_photos_list', views.user_photos_list, name='user_photos_list'),
+    path('photo/view_photo/<int:photo_pk>/', views.view_photo, name='view_photo'),
+    path('photo/user_photos_list/', views.user_photos_list, name='user_photos_list'),
     path('photo/upload_photo/', views.upload_photo, name='upload_photo'),
     path('photo/delete_photo/<int:photo_pk>/', views.delete_photo, name='delete_photo'),
-    path('photo/photo_comment/', views.photo_comment, name='photo_comment'),
+    path('photo/photo_comment/<int:photo_pk>/', views.photo_comment, name='photo_comment'),
 
 #Gallery urls
     path('gallery/add_gallery/', views.add_gallery, name='add_gallery'),

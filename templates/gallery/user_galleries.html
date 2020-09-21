@@ -1,10 +1,10 @@
 {% extends "base.html" %} 
 
 {% block content %}
-<p>gallery owner: {{ request.user }}</p>
+<p>Here's your galleries {{ request.user }}</p>
 {% if galleries is not None %}
     {% for gallery in galleries %}
-        <p>gallery title: {{ gallery.title }}</p>
+        <p>{{ gallery.title }}</p>
     {% endfor %}
 {% endif %}
 {% endblock %}

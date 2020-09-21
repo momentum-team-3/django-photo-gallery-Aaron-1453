@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Photo, Comment, Gallery
-from .forms import GalleryForm, PhotoForm
+from .forms import GalleryForm, PhotoForm, CommentForm
 
 from django.http import HttpResponse
 
@@ -85,10 +85,21 @@ def delete_photo(request, photo_pk):
         'photo': photo
     })
 
-def photo_comment(request):
-    """Add comment to a photo."""
+def photo_comment(request, photo_pk):
+    if request.method == "GET":
+        form = CommentForm()
+    else:
+        photo = get_object_or_404(Photo, pk=photo_pk)
+        form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.comments = photo
+        comment.save()
+        return redirect(to='view_photo', photo_pk=photo_pk)
+    return render(request, 'photo/photo_comment.html',
+                      {'form': form})
 # # goes to url, comment on photo, and takes them back to photo
-    return HttpResponse('photo_comment')
+   
 
 def logout(request):
     return render(request, 'logout.html')
