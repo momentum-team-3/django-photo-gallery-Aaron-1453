@@ -18,6 +18,7 @@ from django.conf import settings
 from django.urls import include, path
 from photo_gallery_aaron import views
 from django.conf.urls.static import static
+from api import views as api_views
 
 
 
@@ -37,7 +38,9 @@ urlpatterns = [
     path('gallery/add_gallery/', views.add_gallery, name='add_gallery'),
     path('gallery/view_gallery/<int:gallery_pk>/', views.view_gallery, name='view_gallery'),
     # path('gallery/edit_gallery<int:gallery_pk>/', views.edit_gallery, name='edit_gallery'),
-    path('gallery/user_galleries/', views.user_galleries, name='user_galleries')
+    path('gallery/user_galleries/', views.user_galleries, name='user_galleries'),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/galleries/', api_views.GalleryListView.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

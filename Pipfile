@@ -18,6 +18,11 @@ gunicorn = "*"
 django-registration-redux = "*"
 pillow = "*"
 django-imagekit = "*"
+insomnia = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.8"
