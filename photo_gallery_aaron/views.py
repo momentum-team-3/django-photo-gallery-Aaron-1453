@@ -33,7 +33,7 @@ def view_gallery(request, gallery_pk):
     
 def user_galleries(request):
     """list of all galleries belonging to user"""
-    galleries = request.user.gallery_owner.all()
+    galleries = request.user.galleries.all()
     return render(request, "gallery/user_galleries.html", {
         'galleries': galleries,
     })
