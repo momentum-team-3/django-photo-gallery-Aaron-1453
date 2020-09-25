@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     # Third-party
     'debug_toolbar',
     'django_extensions',
@@ -160,6 +161,7 @@ if DEBUG:
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 }

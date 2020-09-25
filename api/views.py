@@ -4,8 +4,10 @@ from rest_framework.generics import ListAPIView
 from rest_framework.views import Response, APIView
 from photo_gallery_aaron.models import Gallery
 from api.serializers import GallerySerializer
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, status
 from django.shortcuts import get_object_or_404
+from rest_framework.parsers import FileUploadParser, ParseError
+
 
 # @api_view(http_method_names=['GET'])
 # def gallery_list(request):
@@ -28,6 +30,8 @@ class GalleryDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return self.request.user.galleries
 
+
+# lines 33 -41 are equivalent to lines 16 through 29, I have not tested them though
 # class GalleryViewSet(viewset.ModelViewSet):
 #     serializer_class = GallerySerializer
     
@@ -38,16 +42,17 @@ class GalleryDetailView(generics.RetrieveUpdateDestroyAPIView):
 #         if self.action in ['list', 'create', 'retrieve']:
 #             return self.request.user.galleries
         
-# class PhotoImageView(APIView):
-#     def put(self, request, pk):
-#         get_object_or_404(self.request.user.photos, pk=pk)
-#         #read the uploaded file
-#         #set image on the recipe to the uploaded file
-#         #save the recipe
-#         #let the user know things are good
-#         if 'file' not in request.data:
-#             raise ParseError('empty content')
+class PhotoImageView(APIView):
+    parser_classes = (FileUploadParser, )
+    def put(self, request, pk):
+        photo = get_object_or_404(self.request.user.owner_photos, pk=pk)
+        #read the uploaded file
+        #set image on the recipe to the uploaded file
+        #save the recipe
+        #let the user know things are good
+        if 'file' not in request.data:
+            raise ParseError('empty content')
         
-#         file=request.data['file']
-#         photo.image.save(file.name, file, save=True)
-#         return Response(status=status.HTTP_200_OK)
+        file = request.data['file']
+        photo.photo.save(file.name, file, save=True)
+        return Response(status=status.HTTP_200_OK)

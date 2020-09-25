@@ -5,6 +5,7 @@
 {% if galleries is not None %}
     {% for gallery in galleries %}
         <p>{{ gallery.title }}</p>
+        <p>{{ gallery.id }}</p>
     {% endfor %}
 {% endif %}
 {% endblock %}

@@ -39,11 +39,12 @@ urlpatterns = [
     path('gallery/view_gallery/<int:gallery_pk>/', views.view_gallery, name='view_gallery'),
     # path('gallery/edit_gallery<int:gallery_pk>/', views.edit_gallery, name='edit_gallery'),
     path('gallery/user_galleries/', views.user_galleries, name='user_galleries'),
-#Api urls
+#Gallery Api urls
     path('api-auth/', include('rest_framework.urls')),
     path('api/galleries/', api_views.GalleryListView.as_view()),
-    path('api/galleries/<int:pk>/', api_views.GalleryDetailView.as_view())
-    # path('api/galleries/<int:pk>/image/', api_views.GalleryImageView.as_view()),
+    path('api/galleries/<int:pk>/', api_views.GalleryDetailView.as_view()),
+#Photo Api urls
+    path('api/photo/<int:pk>/photo/', api_views.PhotoImageView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
