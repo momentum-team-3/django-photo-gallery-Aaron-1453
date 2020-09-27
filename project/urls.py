@@ -44,7 +44,11 @@ urlpatterns = [
     path('api/galleries/', api_views.GalleryListView.as_view()),
     path('api/galleries/<int:pk>/', api_views.GalleryDetailView.as_view()),
 #Photo Api urls
-    path('api/photo/<int:pk>/photo/', api_views.PhotoImageView.as_view()),
+    path('api/photo/<int:pk>/', api_views.PhotoImageView.as_view()),
+    path('api/photo/', api_views.PhotoListView.as_view()),
+    path('api/photo/<int:pk>/', api_views.PhotoDetailView.as_view()),
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.authtoken')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

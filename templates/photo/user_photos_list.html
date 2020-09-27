@@ -4,7 +4,7 @@
 {% if photos is not None %}
     {% for photo in photos %}
         <img src='{{ photo.image_thumbnail.url }}'/>
-       
+        <p>{{ photo.id }}</p>
     {% empty %}
         <p>no photos</p>
     {% endfor %}

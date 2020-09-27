@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'djoser',
     # Third-party
     'debug_toolbar',
     'django_extensions',
@@ -160,8 +161,13 @@ if DEBUG:
 # DRF settings
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 }

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from rest_framework.views import Response, APIView
 from photo_gallery_aaron.models import Gallery
-from api.serializers import GallerySerializer
+from api.serializers import GallerySerializer, PhotoSerializer
 from rest_framework import generics, viewsets, status
 from django.shortcuts import get_object_or_404
 from rest_framework.parsers import FileUploadParser, ParseError
@@ -56,3 +56,15 @@ class PhotoImageView(APIView):
         file = request.data['file']
         photo.photo.save(file.name, file, save=True)
         return Response(status=status.HTTP_200_OK)
+    
+class PhotoListView(generics.ListCreateAPIView):
+    serializer_class = PhotoSerializer
+    
+    def get_queryset(self):
+        return self.request.user.owner_photos
+    
+class PhotoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = PhotoSerializer
+    
+    def get_queryset(self):
+        return self.request.user.owner_photos
