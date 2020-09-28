@@ -47,12 +47,11 @@ class PhotoImageView(APIView):
     def put(self, request, pk):
         photo = get_object_or_404(self.request.user.owner_photos, pk=pk)
         #read the uploaded file
-        #set image on the recipe to the uploaded file
-        #save the recipe
+        #set image on the uploaded file
+        #save the image
         #let the user know things are good
         if 'file' not in request.data:
             raise ParseError('empty content')
-        
         file = request.data['file']
         photo.photo.save(file.name, file, save=True)
         return Response(status=status.HTTP_200_OK)

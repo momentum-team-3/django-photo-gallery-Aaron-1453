@@ -37,15 +37,15 @@ urlpatterns = [
 #Gallery urls
     path('gallery/add_gallery/', views.add_gallery, name='add_gallery'),
     path('gallery/view_gallery/<int:gallery_pk>/', views.view_gallery, name='view_gallery'),
-    # path('gallery/edit_gallery/<int:gallery_pk>/', views.edit_gallery, name='edit_gallery'),
+    path('gallery/edit_gallery/<int:gallery_pk>/', views.edit_gallery, name='edit_gallery'),
     path('gallery/user_galleries/', views.user_galleries, name='user_galleries'),
-    path('gallery/delete_gallery/<int:gallery_id>/', views.delete_gallery, name='delete_gallery'),
+    path('gallery/delete_gallery/<int:gallery_pk>/', views.delete_gallery, name='delete_gallery'),
 #Gallery Api urls
     path('api-auth/', include('rest_framework.urls')),
     path('api/galleries/', api_views.GalleryListView.as_view()),
     path('api/galleries/<int:pk>/', api_views.GalleryDetailView.as_view()),
 #Photo Api urls
-    path('api/photo/<int:pk>/', api_views.PhotoImageView.as_view()),
+    path('api/photo/<int:pk>/image/', api_views.PhotoImageView.as_view()),
     path('api/photo/', api_views.PhotoListView.as_view()),
     path('api/photo/<int:pk>/', api_views.PhotoDetailView.as_view()),
     path('api/auth/', include('djoser.urls')),

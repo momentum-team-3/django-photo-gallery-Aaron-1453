@@ -3,6 +3,6 @@
 {% block content %}
 <p>hello {{ user.username }}</p>
 <p>{{ gallery.title }}</p>
-<a href="{% url 'delete_gallery' gallery_id=gallery.id %}">Delete Gallery</a>
-<a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">edit_gallery</a>
+<a href="{% url 'delete_gallery' gallery_pk=gallery.pk%}">Delete Gallery</a>
+<a href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">edit_gallery</a>
 {% endblock %}

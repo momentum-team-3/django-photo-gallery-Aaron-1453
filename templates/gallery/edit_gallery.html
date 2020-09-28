@@ -4,6 +4,7 @@
 <p>hello {{ user.username }}</p>
 <form action="{% url 'edit_gallery' gallery_pk=gallery.pk %}" method="PATCH">
     {% csrf_token %}
+    {{ form.as_p }}
     <button type='submit'>Update Gallery</button>
 </form>
 {% endblock %}

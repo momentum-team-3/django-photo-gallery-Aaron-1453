@@ -38,20 +38,18 @@ def user_galleries(request):
         'galleries': galleries,
     })
     
-'''not working '''   
 def edit_gallery(request, gallery_pk):
+    gallery = get_object_or_404(request.user.galleries, pk=gallery_pk)
     if request.method == "GET":
-        form = GalleryEditForm()
+        form = GalleryForm(instance=gallery)
     else:
-        form = GalleryEditForm(data=request.PATCH)
-    if form.is_valid():
-            gallery = form.save(commit=False)
-            gallery.owner = request.user
-            gallery.save()
-            return redirect(to='view_gallery', gallery_pk=gallery.pk)
-    return render(request, "gallery/add_gallery.html", {'form':form})
-'''not working'''
-
+        form = GalleryForm(instance=gallery, data=request.POST)
+        if form.is_valid():
+            gallery = form.save()
+            return redirect(to="view_gallery", pk=gallery_pk)        
+    return render(request, 'gallery/edit_gallery.html', 
+        {"form": form, "gallery": gallery,}) 
+        
 def view_photo(request, photo_pk):
     """Return list of details for a photo."""
     photo = get_object_or_404(request.user.owner_photos, pk=photo_pk)
@@ -91,24 +89,24 @@ def delete_photo(request, photo_pk):
     })
 
 def photo_comment(request, photo_pk):
+    photo = get_object_or_404(Photo, pk=photo_pk)
     if request.method == "GET":
         form = CommentForm()
-    else:
-        photo = get_object_or_404(Photo, pk=photo_pk)
+    else:   
         form = CommentForm(request.POST)
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.author = request.user
-        comment.photo = photo
-        comment.save()
-        return redirect(to='view_photo', photo_pk=photo_pk)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.photo = photo
+            comment.save()
+            return redirect(to='view_photo', photo_pk=photo_pk)
     return render(request, 'photo/photo_comment.html',
-                      {'form': form})
+                      {'form': form, 'photo': photo})
 # # goes to url, comment on photo, and takes them back to photo
 
-def delete_gallery(request, gallery_id):
+def delete_gallery(request, gallery_pk):
     """Delete gallery from user account."""
-    gallery = get_object_or_404(Gallery, pk=gallery_id)
+    gallery = get_object_or_404(Gallery, pk=gallery_pk)
     if request.method == "POST":
         gallery.delete()
         return redirect('user_galleries')

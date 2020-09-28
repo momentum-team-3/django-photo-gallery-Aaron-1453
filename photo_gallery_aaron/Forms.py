@@ -23,10 +23,3 @@ class CommentForm(forms.ModelForm):
             'text',
         ]
 
-# class GalleryEditForm(forms.ModelForm):
-#     class Meta:
-#         model = Gallery
-#         fields = [
-#             'title',
-#             'public'
-#         ]
