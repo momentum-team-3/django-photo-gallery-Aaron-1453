@@ -29,4 +29,4 @@ class Gallery(models.Model):
     photos = models.ManyToManyField(to=Photo, related_name='galleries', blank=True)
     title = models.CharField(max_length=600)
     public = models.BooleanField(default=False)
-    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="galleries", blank=True)
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='galleries', blank=True)

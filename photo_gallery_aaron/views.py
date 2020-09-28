@@ -38,14 +38,19 @@ def user_galleries(request):
         'galleries': galleries,
     })
     
-    
-# def edit_gallery(request, gallery_pk):
-#     gallery = get_object_or_404(Gallery, pk=gallery_pk)
-#     photos=gallery.photos.all()
-#     return render(request, "gallery/edit_gallery.html", {
-#         'gallery': gallery,
-#         'photos': photos,
-#         "gallery_pk": gallery_pk,})
+'''not working '''   
+def edit_gallery(request, gallery_pk):
+    if request.method == "GET":
+        form = GalleryEditForm()
+    else:
+        form = GalleryEditForm(data=request.PATCH)
+    if form.is_valid():
+            gallery = form.save(commit=False)
+            gallery.owner = request.user
+            gallery.save()
+            return redirect(to='view_gallery', gallery_pk=gallery.pk)
+    return render(request, "gallery/add_gallery.html", {'form':form})
+'''not working'''
 
 def view_photo(request, photo_pk):
     """Return list of details for a photo."""
@@ -93,13 +98,26 @@ def photo_comment(request, photo_pk):
         form = CommentForm(request.POST)
     if form.is_valid():
         comment = form.save(commit=False)
-        comment.comments = photo
+        comment.author = request.user
+        comment.photo = photo
         comment.save()
         return redirect(to='view_photo', photo_pk=photo_pk)
     return render(request, 'photo/photo_comment.html',
                       {'form': form})
 # # goes to url, comment on photo, and takes them back to photo
-   
+
+def delete_gallery(request, gallery_id):
+    """Delete gallery from user account."""
+    gallery = get_object_or_404(Gallery, pk=gallery_id)
+    if request.method == "POST":
+        gallery.delete()
+        return redirect('user_galleries')
+    return render (request, 'gallery/delete_gallery.html', {
+        'gallery': gallery
+    })
+
+# def delete_gallery(request, gallery_id):
+#     return HttpResponse("Youre looking at '{% gallery.title %}'")
 
 def logout(request):
     return render(request, 'logout.html')

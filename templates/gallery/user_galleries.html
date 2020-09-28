@@ -4,7 +4,7 @@
 <p>Here's your galleries {{ request.user }}</p>
 {% if galleries is not None %}
     {% for gallery in galleries %}
-        <p>{{ gallery.title }}</p>
+        <a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">{{ gallery.title }}</a>
         <p>{{ gallery.id }}</p>
     {% endfor %}
 {% endif %}

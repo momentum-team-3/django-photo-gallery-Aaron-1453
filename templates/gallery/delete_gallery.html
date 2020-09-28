@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>hello {{ user.username }}</p>
+<form action="{% url 'delete_gallery' gallery_id=gallery.id %}" method="POST">
+    {% csrf_token %}
+    <button type='submit'>delete_gallery</button>
+</form>
+{% endblock %}

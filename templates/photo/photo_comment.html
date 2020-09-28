@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action='{% url photo_comment photo_pk=photo_pk %}' method='POST'>
+<form action="{% url 'photo_comment' photo_pk=photo.pk %}" method='POST'>
     {% csrf_token %}
     {{ form.as_p }}
         <button type='submit'>Add Comment</button>

@@ -20,6 +20,13 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = [
-            'text'
+            'text',
         ]
-        
+
+# class GalleryEditForm(forms.ModelForm):
+#     class Meta:
+#         model = Gallery
+#         fields = [
+#             'title',
+#             'public'
+#         ]

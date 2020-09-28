@@ -2,12 +2,7 @@
 
 {% block content %}
 <p>hello {{ user.username }}</p>
-{% if photos is not None %}
-    {% for photo in photos %}
-        <img src='{{ photo.image_thumbnail.url }}'/>
-    {% empty %}
-        <p>no photos</p>
-    {% endfor %}
-{% endif %}
-<h1>view_gallery!</h1>
+<p>{{ gallery.title }}</p>
+<a href="{% url 'delete_gallery' gallery_id=gallery.id %}">Delete Gallery</a>
+<a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">edit_gallery</a>
 {% endblock %}
