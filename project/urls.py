@@ -30,7 +30,7 @@ urlpatterns = [
 # Photo urls
     path('photo/view_photo/<int:photo_pk>/', views.view_photo, name='view_photo'),
     path('photo/user_photos_list/', views.user_photos_list, name='user_photos_list'),
-    path('photo/upload_photo/', views.upload_photo, name='upload_photo'),
+    path('photo/upload_photo/<int:gallery_pk>/', views.upload_photo, name='upload_photo'),
     path('photo/delete_photo/<int:photo_pk>/', views.delete_photo, name='delete_photo'),
     path('photo/photo_comment/<int:photo_pk>/', views.photo_comment, name='photo_comment'),
 

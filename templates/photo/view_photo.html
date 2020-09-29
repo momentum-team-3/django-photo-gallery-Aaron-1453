@@ -4,17 +4,15 @@
 
 <img src='{{ photo.image_thumbnail.url }}'/>
 <form action="{% url 'photo_comment' photo_pk=photo_pk %}" method="POST">
-{% if comment is not None %}
-    {% for comment in photos %}
-        <p>{{ comment.photo }}</p>
-        <p>{{ comment.author </p>
-    {% empty %}
-        <p>no comments</p>
-    {% endfor %}
-{% endif %}
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Comment</button>
+<p>{{ photo.owner }}</p>
+<p>{{ photo.pk }}</p>
+{% for comment in comments %}
+    <p>{{ comment.author}}</p>
+    <p>{{ comment.text }}</p>
+{% endfor %}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
     </form>
 </form>
 

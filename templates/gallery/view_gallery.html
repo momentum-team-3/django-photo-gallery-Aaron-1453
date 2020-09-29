@@ -3,6 +3,10 @@
 {% block content %}
 <p>hello {{ user.username }}</p>
 <p>{{ gallery.title }}</p>
+    {% for photo in gallery.photos.all %}
+        <img src='{{ photo.image_thumbnail.url }}'/>
+    {% endfor %}
 <a href="{% url 'delete_gallery' gallery_pk=gallery.pk%}">Delete Gallery</a>
+<a href="{% url 'upload_photo' gallery_pk=gallery.pk %}">add photo</a>
 <a href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">edit_gallery</a>
 {% endblock %}

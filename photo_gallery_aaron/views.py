@@ -10,24 +10,21 @@ def homepage(request):
     return render(request, "homepage.html", {}) 
 
 def add_gallery(request):
-    if request.method == "GET":
-        form = GalleryForm()
-    else:
-        form = GalleryForm(data=request.POST)
+    if request.method == "POST":
+        form = GalleryForm(request.POST)
         if form.is_valid():
             gallery = form.save(commit=False)
             gallery.owner = request.user
             gallery.save()
             return redirect(to='view_gallery', gallery_pk=gallery.pk)
+    form = GalleryForm()
     return render(request, "gallery/add_gallery.html", {'form':form})
 
 def view_gallery(request, gallery_pk):
     """Returns list of galleries for gallery view."""
     gallery = get_object_or_404(Gallery, pk=gallery_pk)
-    photos = gallery.photos.all()
     return render(request, "gallery/view_gallery.html", {
         'gallery': gallery,
-        'photos': photos,
         "gallery_pk": gallery_pk,
     })
     
@@ -46,16 +43,18 @@ def edit_gallery(request, gallery_pk):
         form = GalleryForm(instance=gallery, data=request.POST)
         if form.is_valid():
             gallery = form.save()
-            return redirect(to="view_gallery", pk=gallery_pk)        
+            return redirect(to="view_gallery", gallery_pk=gallery_pk)        
     return render(request, 'gallery/edit_gallery.html', 
         {"form": form, "gallery": gallery,}) 
         
 def view_photo(request, photo_pk):
     """Return list of details for a photo."""
     photo = get_object_or_404(request.user.owner_photos, pk=photo_pk)
+    comments = photo.comments.all()
     return render(request, "photo/view_photo.html", {
         'photo': photo,
         'photo_pk': photo_pk,
+        'comments': comments,
     })
 
 def user_photos_list(request):
@@ -64,18 +63,20 @@ def user_photos_list(request):
         "photos": photos
     })
 
-def upload_photo(request):
-    if request.method == "GET":
-        form = PhotoForm()
-    else:
+def upload_photo(request, gallery_pk):
+    gallery = get_object_or_404(request.user.galleries, pk=gallery_pk)
+    if request.method == "POST":
         form = PhotoForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             photo = form.save(commit=False)
-            photo.owner = request.user
+            photo.owner_photos = request.user
+            photo.gallery = gallery
             photo.save()
-            return redirect(to='user_photos_list')
+            return redirect(to='view_gallery', gallery_pk=gallery_pk)
+    form = PhotoForm()
     return render(request, "photo/upload_photo.html", {
-        'form':form
+        'form':form,
+        "gallery": gallery,
         })
 
 def delete_photo(request, photo_pk):
@@ -93,7 +94,7 @@ def photo_comment(request, photo_pk):
     if request.method == "GET":
         form = CommentForm()
     else:   
-        form = CommentForm(request.POST)
+        form = CommentForm(data=request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.author = request.user
@@ -102,7 +103,7 @@ def photo_comment(request, photo_pk):
             return redirect(to='view_photo', photo_pk=photo_pk)
     return render(request, 'photo/photo_comment.html',
                       {'form': form, 'photo': photo})
-# # goes to url, comment on photo, and takes them back to photo
+
 
 def delete_gallery(request, gallery_pk):
     """Delete gallery from user account."""
@@ -114,12 +115,5 @@ def delete_gallery(request, gallery_pk):
         'gallery': gallery
     })
 
-# def delete_gallery(request, gallery_id):
-#     return HttpResponse("Youre looking at '{% gallery.title %}'")
-
 def logout(request):
     return render(request, 'logout.html')
-
-# def view_profile(request):
-#     """Return user details, uploaded photos and galleries."""
-#     return HttpResponse('view_profile')
