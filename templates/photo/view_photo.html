@@ -4,8 +4,6 @@
 
 <img src='{{ photo.image_thumbnail.url }}'/>
 <form action="{% url 'photo_comment' photo_pk=photo_pk %}" method="POST">
-<p>{{ photo.owner }}</p>
-<p>{{ photo.pk }}</p>
 {% for comment in comments %}
     <p>{{ comment.author }}</p>
     <p>{{ comment.text }}</p>

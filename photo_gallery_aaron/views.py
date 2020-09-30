@@ -47,7 +47,7 @@ def edit_gallery(request, gallery_pk):
         
 def view_photo(request, photo_pk):
     """Return list of details for a photo."""
-    photo = get_object_or_404(Photo.photo, pk=photo_pk)
+    photo = get_object_or_404(Photo, pk=photo_pk)
     comments = photo.comments.all()
     return render(request, "photo/view_photo.html", {
         'photo': photo,

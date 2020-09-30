@@ -10,7 +10,6 @@
 <div>
     {% for photo in gallery.photos.all %}
     <a href="{% url 'view_photo' photo_pk=photo.pk %}"><img src='{{ photo.image_thumbnail.url }}'/></a>
-        <p>{{ photo.pk }}</p> 
     {% endfor %}
 </div>
 <div>
