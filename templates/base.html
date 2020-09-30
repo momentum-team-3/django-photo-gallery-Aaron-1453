@@ -3,21 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %}Photogallery App{% endblock %}</title>
     {% block meta %} {% endblock %}
   </head>
+  <div>
   <h1>Photogallery App</h1>
+</div>
+<div>
   {% block navbar %}
   <nav>
-    <p><a href = "{% url 'add_gallery' %}"> make a new gallery</a></p>
-    <p><a href = "{% url 'homepage' %}"> home</a></p>
-   
-    <p><a href = "{% url 'user_galleries' %}"> your galleries </a></p>
-    <p><a href = "{% url 'user_photos_list' %}"> your photos </a></p>
-    <p><a href = "{% url 'auth_logout' %}">log out</a></p>
+    <a href = "{% url 'add_gallery' %}"><p>make a new gallery</p></a>
+    <a href = "{% url 'user_galleries' %}"><p>your galleries</p></a>
+    <a href = "{% url 'auth_logout' %}"><p>log out</p></a>
+    <a href = "{% url 'homepage' %}"><p>home</p></a>
   </nav>
   {% endblock %}
   <body>
     {% block content %} {% endblock %}
   </body>
+</div>
 </html>

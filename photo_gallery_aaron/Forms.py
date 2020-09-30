@@ -6,7 +6,6 @@ class GalleryForm(forms.ModelForm):
         model = Gallery
         fields = [
             'title',
-            'public'
         ]
         
 class PhotoForm(forms.ModelForm):
@@ -22,4 +21,3 @@ class CommentForm(forms.ModelForm):
         fields = [
             'text',
         ]
-

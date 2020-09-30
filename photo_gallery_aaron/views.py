@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Photo, Comment, Gallery
 from .forms import GalleryForm, PhotoForm, CommentForm
 
-from django.http import HttpResponse
-
 # Create your views here.
 
 def homepage(request):
@@ -49,17 +47,17 @@ def edit_gallery(request, gallery_pk):
         
 def view_photo(request, photo_pk):
     """Return list of details for a photo."""
-    photo = get_object_or_404(request.user.owner_photos, pk=photo_pk)
+    photo = get_object_or_404(Photo.photo, pk=photo_pk)
     comments = photo.comments.all()
     return render(request, "photo/view_photo.html", {
         'photo': photo,
         'photo_pk': photo_pk,
         'comments': comments,
     })
-
-def user_photos_list(request):
+## still renders owner photos, of which there are
+def gallery_photos_list(request):
     photos = request.user.owner_photos.all()
-    return render(request, "photo/user_photos_list.html", {
+    return render(request, "photo/gallery_photos_list.html", {
         "photos": photos
     })
 
@@ -84,7 +82,7 @@ def delete_photo(request, photo_pk):
     photo = get_object_or_404(Photo, pk=photo_pk)
     if request.method == "POST":
         photo.delete()
-        return redirect('user_photos_list')
+        return redirect('gallery_photos_list')
     return render (request, 'photo/delete_photo.html', {
         'photo': photo
     })

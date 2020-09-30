@@ -22,6 +22,5 @@ class PhotoSerializer(serializers.ModelSerializer):
             'photo',
             'gallery',
             'owner',
-            'pinned'
         ]
     

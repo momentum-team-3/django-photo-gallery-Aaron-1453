@@ -7,13 +7,16 @@
 <p>{{ photo.owner }}</p>
 <p>{{ photo.pk }}</p>
 {% for comment in comments %}
-    <p>{{ comment.author}}</p>
+    <p>{{ comment.author }}</p>
     <p>{{ comment.text }}</p>
 {% endfor %}
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Add Comment</button>
-    </form>
+</form>
+<form action='{% url 'delete_photo' photo.pk %}' method="POST">
+    {% csrf_token %}
+    <button type='submit'>delete_photo</button>
 </form>
 
 

@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div>
 <p>hello {{ user.username }}</p>
+</div>
+<div>
 <p>{{ gallery.title }}</p>
+</div>
+<div>
     {% for photo in gallery.photos.all %}
-        <img src='{{ photo.image_thumbnail.url }}'/>
+    <a href="{% url 'view_photo' photo_pk=photo.pk %}"><img src='{{ photo.image_thumbnail.url }}'/></a>
+        <p>{{ photo.pk }}</p> 
     {% endfor %}
-<a href="{% url 'delete_gallery' gallery_pk=gallery.pk%}">Delete Gallery</a>
-<a href="{% url 'upload_photo' gallery_pk=gallery.pk %}">add photo</a>
-<a href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">edit_gallery</a>
+</div>
+<div>
+<a href="{% url 'upload_photo' gallery_pk=gallery.pk %}">Add a picture to your gallery</a><br>
+<a href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">Change or delete this gallery</a>
+</div>
 {% endblock %}

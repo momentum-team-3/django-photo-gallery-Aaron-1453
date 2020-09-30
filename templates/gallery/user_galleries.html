@@ -1,11 +1,17 @@
 {% extends "base.html" %} 
 
 {% block content %}
-<p>Here's your galleries {{ request.user }}</p>
-{% if galleries is not None %}
+<div>
+    <p>Here's your galleries {{ request.user }}</p>
+</div>
+<div>
+    {% if galleries is not None %}
     {% for gallery in galleries %}
         <a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">{{ gallery.title }}</a>
         <p>{{ gallery.pk }}</p>
+    {% empty %}
+        <p>You don't have any galleries</p>
     {% endfor %}
 {% endif %}
+</div>
 {% endblock %}
