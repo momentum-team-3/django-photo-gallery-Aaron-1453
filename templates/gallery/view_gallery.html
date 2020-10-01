@@ -6,8 +6,8 @@
         <h1>{{ gallery.title }}</h1>
         </div>
         <div class="button-container">
-            <a class="text" href="{% url 'upload_photo' gallery_pk=gallery.pk %}">Add image</a>
-            <a class="text" href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">Edit gallery</a>
+            <a class="button" href="{% url 'upload_photo' gallery_pk=gallery.pk %}">Add image</a>
+            <a class="button" href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">Edit gallery</a>
             </div>
         <div class="gallery-img-container">
             {% for photo in gallery.photos.all %}

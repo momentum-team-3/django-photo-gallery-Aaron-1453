@@ -5,6 +5,6 @@
 <img src='{{ photo.photo.url }}'/>
 <form action='{% url 'delete_photo' photo.pk %}' method="POST">
     {% csrf_token %}
-    <button type='submit'>delete_photo</button>
+    <button type='submit' class='button'>delete_photo</button>
 </form>
 {% endblock %}

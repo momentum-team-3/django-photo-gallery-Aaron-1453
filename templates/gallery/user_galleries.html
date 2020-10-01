@@ -7,7 +7,7 @@
 <div>
     {% if galleries is not None %}
     {% for gallery in galleries %}
-        <a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">{{ gallery.title }}</a>
+        <a class='button' href="{% url 'view_gallery' gallery_pk=gallery.pk %}">{{ gallery.title }}</a>
         <p>{{ gallery.pk }}</p>
     {% empty %}
         <p>You don't have any galleries</p>

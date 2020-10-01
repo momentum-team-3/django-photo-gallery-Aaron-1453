@@ -112,3 +112,22 @@ footer {
     justify-content: space-evenly;
     width: 45%;
 }
+
+.button {
+    border-radius: 40%;
+    background-color: #294936;
+    box-shadow: 0 5px 0 #212922;
+    color: white;
+    padding: .3em .5em;
+    position: relative;
+    text-decoration: none;
+
+.button:hover {
+    background-color: #ce0606;
+  }
+
+
+.button:active {
+    box-shadow: none;
+    top: 5px;
+}

@@ -5,6 +5,6 @@
 <form action ="{% url 'upload_photo' gallery_pk=gallery.pk %}" method='POST' enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_p }}
-<button type="submit">Upload a picture</button>
+<button type="submit" class='button'>Upload a picture</button>
 </form>
 {% endblock %}

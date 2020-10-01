@@ -8,13 +8,13 @@
 <form action="{% url 'edit_gallery' gallery_pk=gallery.pk %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type='submit'>Update Gallery</button>
+    <button type='submit' class='button'>Update Gallery</button>
 </form>
 </div>
 <div>
 <form action="{% url 'delete_gallery' gallery_pk=gallery.pk %}" method="POST">
     {% csrf_token %}
-    <button type='submit'>delete_gallery</button>
+    <button type='submit'class='button'>delete_gallery</button>
 </form>
 </div>
 {% endblock %}

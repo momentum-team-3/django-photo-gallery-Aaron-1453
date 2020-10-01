@@ -5,6 +5,6 @@
 <form action ="{% url 'add_gallery' %}" method='Post'>
 {% csrf_token %}
 {{ form.as_p }}
-<button type="submit">Add Gallery</button>
+<button type="submit" class="button">Add Gallery</button>
 </form>
 {% endblock %}
