@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>upload_photo</h1>
+<h1>Upload a picture</h1>
 <form action ="{% url 'upload_photo' gallery_pk=gallery.pk %}" method='POST' enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_p }}
-<button type="submit">upload_photo</button>
+<button type="submit">Upload a picture</button>
 </form>
 {% endblock %}

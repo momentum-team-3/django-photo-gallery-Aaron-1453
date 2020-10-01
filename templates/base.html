@@ -10,19 +10,17 @@
     {% block meta %} 
     {% endblock %}
   </head>
-  <div>
-  <a href="{% url 'homepage' %}"><h1>Picmash</h1></a>
-</div>
-  {% block navbar %}
-  <div>
-    <nav>
-      <a href = "{% url 'add_gallery' %}"><p>make a new gallery</p></a>
-      <a href = "{% url 'auth_logout' %}"><p>log out</p></a>
-      <a href="http://google.com"><i class="fas fa-camera"></i> take me to googlets</a>
-    </nav>
-  </div>
-  {% endblock %}
   <body>
+  {% block navbar %}
+    <div class="header">
+      <a href="{% url 'homepage' %}"><p>PicMash</p></a>
+      <nav class="nav-items">
+        <h3>Welcome back,&nbsp;&nbsp;{{ user.username }}!</h3>
+        <a href = "{% url 'add_gallery' %}"><i class="fas fa-th-large"></i>&nbsp;create gallery</a>
+        <a href = "{% url 'auth_logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp;logout</a>
+      </nav>
+    </div>
+  {% endblock %}
     {% block content %} {% endblock %}
   </body>
 </html>

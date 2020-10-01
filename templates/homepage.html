@@ -11,18 +11,19 @@ or
 </p>
 </div>
 {% else %}
-<p>Welcome back {{ user.username }}!</p>
-<div>
-    <p>Here's your galleries</p>
+<div class="content">
+    <h1>{{ user.username }}'s Galleries</h1>
+        {% if galleries is not None %}
+        <div class="gallery-title-list">
+            {% for gallery in galleries %}
+            <a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">{{ gallery.title }}</a>  
+        {% empty %}
+        <p>You don't have any galleries</p>
+        {% endfor %}
+        {% endif %}
+    </div>
 </div>
-<div>
-    {% if galleries is not None %}
-    {% for gallery in galleries %}
-    <a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">{{ gallery.title }}</a>
-    <p>{{ gallery.pk }}</p>
-    {% empty %}
-    <p>You don't have any galleries</p>
-    {% endfor %}
-    {% endif %}
+
+<footer>PicMash ©2020 (powered by Django)</footer>
 {% endif %}
 {% endblock %}

@@ -9,11 +9,6 @@ def homepage(request):
     if request.user.is_authenticated:
         galleries = request.user.galleries.all()
         return render (request, "homepage.html", { "galleries": galleries })
-    
-    # galleries = request.user.galleries.all()
-    # return render(request, "homepage.html", {
-    #     'galleries': galleries,
-    #     })
     return render(request, "homepage.html")
 
 def add_gallery(request):
@@ -57,7 +52,7 @@ def view_photo(request, photo_pk):
         'photo_pk': photo_pk,
         'comments': comments,
     })
-## still renders owner photos, of which there are
+##didn't need this
 def gallery_photos_list(request):
     photos = request.user.owner_photos.all()
     return render(request, "photo/gallery_photos_list.html", {

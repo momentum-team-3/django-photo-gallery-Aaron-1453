@@ -5,7 +5,6 @@
 <img src='{{ photo.image_thumbnail.url }}'/>
 <form action="{% url 'photo_comment' photo_pk=photo_pk %}" method="POST">
 {% for comment in comments %}
-    <p>{{ comment.author }}</p>
     <p>{{ comment.text }}</p>
 {% endfor %}
     {% csrf_token %}

@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-<p>hello {{ user.username }}</p>
+<div class="content">
+    <div>
+        <h1>{{ gallery.title }}</h1>
+        </div>
+        <div class="button-container">
+            <a class="text" href="{% url 'upload_photo' gallery_pk=gallery.pk %}">Add image</a>
+            <a class="text" href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">Edit gallery</a>
+            </div>
+        <div class="gallery-img-container">
+            {% for photo in gallery.photos.all %}
+            <a href="{% url 'view_photo' photo_pk=photo.pk %}"><img src='{{ photo.image_thumbnail.url }}'/></a>
+            {% endfor %}
+        </div>
 </div>
-<div>
-<p>{{ gallery.title }}</p>
-</div>
-<div>
-    {% for photo in gallery.photos.all %}
-    <a href="{% url 'view_photo' photo_pk=photo.pk %}"><img src='{{ photo.image_thumbnail.url }}'/></a>
-    {% endfor %}
-</div>
-<div>
-<a href="{% url 'upload_photo' gallery_pk=gallery.pk %}">Add a picture to your gallery</a><br>
-<a href="{% url 'edit_gallery' gallery_pk=gallery.pk %}">Change or delete this gallery</a>
-</div>
+<footer>PicMash ©2020 (powered by Django)</footer>
 {% endblock %}
