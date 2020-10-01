@@ -114,17 +114,14 @@ footer {
 }
 
 .button {
-    border-radius: 40%;
-    background-color: #294936;
-    box-shadow: 0 5px 0 #212922;
-    color: white;
-    padding: .3em .5em;
+    color:  #5B8266;
     position: relative;
     text-decoration: none;
+}
 
 .button:hover {
-    background-color: #ce0606;
-  }
+    color: #212922;
+}
 
 
 .button:active {
