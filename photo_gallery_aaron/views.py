@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Photo, Comment, Gallery
 from .forms import GalleryForm, PhotoForm, CommentForm
+from django.http import HttpResponse
 
 # Create your views here.
 
 def homepage(request):
-    return render(request, "homepage.html", {}) 
+    if request.user.is_authenticated:
+        galleries = request.user.galleries.all()
+        return render (request, "homepage.html", { "galleries": galleries })
+    
+    # galleries = request.user.galleries.all()
+    # return render(request, "homepage.html", {
+    #     'galleries': galleries,
+    #     })
+    return render(request, "homepage.html")
 
 def add_gallery(request):
     if request.method == "POST":
@@ -26,13 +35,7 @@ def view_gallery(request, gallery_pk):
         "gallery_pk": gallery_pk,
     })
     
-def user_galleries(request):
-    """list of all galleries belonging to user"""
-    galleries = request.user.galleries.all()
-    return render(request, "gallery/user_galleries.html", {
-        'galleries': galleries,
-    })
-    
+
 def edit_gallery(request, gallery_pk):
     gallery = get_object_or_404(request.user.galleries, pk=gallery_pk)
     if request.method == "GET":
@@ -108,10 +111,7 @@ def delete_gallery(request, gallery_pk):
     gallery = get_object_or_404(Gallery, pk=gallery_pk)
     if request.method == "POST":
         gallery.delete()
-        return redirect('user_galleries')
-    return render (request, 'gallery/delete_gallery.html', {
-        'gallery': gallery
-    })
+    return homepage(request)
 
 def logout(request):
     return render(request, 'logout.html')

@@ -24,6 +24,9 @@ from api import views as api_views
 
 urlpatterns = [
     path('', views.homepage, name='homepage'),
+    path('', include([
+         path('gallery/delete_gallery/<int:gallery_pk>/', views.delete_gallery, name='delete_gallery'),
+    ])),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/logout/', views.logout, name='logout'),
@@ -38,8 +41,7 @@ urlpatterns = [
     path('gallery/add_gallery/', views.add_gallery, name='add_gallery'),
     path('gallery/view_gallery/<int:gallery_pk>/', views.view_gallery, name='view_gallery'),
     path('gallery/edit_gallery/<int:gallery_pk>/', views.edit_gallery, name='edit_gallery'),
-    path('gallery/user_galleries/', views.user_galleries, name='user_galleries'),
-    path('gallery/delete_gallery/<int:gallery_pk>/', views.delete_gallery, name='delete_gallery'),
+    # path('gallery/delete_gallery/<int:gallery_pk>/', views.delete_gallery, name='delete_gallery'),
 #Gallery Api urls
     path('api-auth/', include('rest_framework.urls')),
     path('api/galleries/', api_views.GalleryListView.as_view()),
@@ -50,7 +52,7 @@ urlpatterns = [
     path('api/photo/<int:pk>/', api_views.PhotoDetailView.as_view()),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.authtoken')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

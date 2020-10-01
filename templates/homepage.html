@@ -1,15 +1,28 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
-{% block content %} 
-    {% if user.is_authenticated %}
-        <p>Hi, {{ user.username }}!</p>
-    {% else %}
-        <p>
-        <a href="{% url 'auth_login' %}">login</a>
-        </p>
-        or 
-        <p>
-        <a href="{% url 'registration_register' %}">sign up</a>
-        </p>
-    {% endif %} 
+{% block content %}
+{% if user.is_authenticated is False %}
+<p>
+    <a href="{% url 'auth_login' %}">login</a>
+</p>
+or
+<p>
+    <a href="{% url 'registration_register' %}">sign up</a>
+</p>
+</div>
+{% else %}
+<p>Welcome back {{ user.username }}!</p>
+<div>
+    <p>Here's your galleries</p>
+</div>
+<div>
+    {% if galleries is not None %}
+    {% for gallery in galleries %}
+    <a href="{% url 'view_gallery' gallery_pk=gallery.pk %}">{{ gallery.title }}</a>
+    <p>{{ gallery.pk }}</p>
+    {% empty %}
+    <p>You don't have any galleries</p>
+    {% endfor %}
+    {% endif %}
+{% endif %}
 {% endblock %}

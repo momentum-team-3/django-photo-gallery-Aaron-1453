@@ -1,27 +1,28 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% load static %}
-    <title>{% block title %}Photogallery App{% endblock %}</title>
-    {% block meta %} {% endblock %}
+    <link rel="stylesheet" href="{% static '/css/style.css/' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <title>{% block title %}Picmash{% endblock %}</title>
+    {% block meta %} 
+    {% endblock %}
   </head>
   <div>
-  <h1>Photogallery App</h1>
+  <a href="{% url 'homepage' %}"><h1>Picmash</h1></a>
 </div>
-<div>
   {% block navbar %}
-  <nav>
-    <a href = "{% url 'add_gallery' %}"><p>make a new gallery</p></a>
-    <a href = "{% url 'user_galleries' %}"><p>your galleries</p></a>
-    <a href = "{% url 'auth_logout' %}"><p>log out</p></a>
-    <a href = "{% url 'homepage' %}"><p>home</p></a>
-  </nav>
+  <div>
+    <nav>
+      <a href = "{% url 'add_gallery' %}"><p>make a new gallery</p></a>
+      <a href = "{% url 'auth_logout' %}"><p>log out</p></a>
+      <a href="http://google.com"><i class="fas fa-camera"></i> take me to googlets</a>
+    </nav>
+  </div>
   {% endblock %}
   <body>
     {% block content %} {% endblock %}
   </body>
-</div>
 </html>
